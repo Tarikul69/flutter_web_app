@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:web_app/network/error_screen.dart';
+import 'package:web_app/network/network_error.dart';
 import 'package:web_app/splashscreen/splashscreen.dart';
 
 void main() {
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: splashscreen(),
+      //home: network_error(),
     );
   }
 }

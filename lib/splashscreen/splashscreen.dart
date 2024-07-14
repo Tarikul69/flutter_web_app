@@ -31,14 +31,7 @@ class _splashscreenState extends State<splashscreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: const Text(
-          'eMedical',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        child: Image.asset("assets/images/splash_screen.jpg"),
       ),
     );
   }
