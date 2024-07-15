@@ -18,15 +18,16 @@ class _splashscreenState extends State<splashscreen> {
   _navigatetoscreen() async {
     //Get.pu
 
-    await Future.delayed(Duration(milliseconds: 1500), () {});
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => home(),
+        builder: (context) => const home(),
       ),
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
