@@ -17,9 +17,6 @@ dependencies:
   webview_flutter: ^4.8.0
   flutter_webview_plugin: ^0.4.0
   internet_connection_checker_plus: ^2.5.0
-  connectivity_plus: ^6.0.3
-  get: ^4.6.6
-  http:
 
 dev_dependencies:
   flutter_test:
