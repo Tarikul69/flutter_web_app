@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 class error_Screen extends StatelessWidget {
@@ -10,13 +12,13 @@ class error_Screen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset("assets/images/network_error.png"),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Center(
             child: Title(
               color: Colors.black,
-              child: Text(
+              child: const Text(
                 "Check Your Internet Connection",
                 style: TextStyle(),
               ),
