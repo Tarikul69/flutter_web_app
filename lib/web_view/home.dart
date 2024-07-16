@@ -6,12 +6,8 @@ class home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: const WebviewScaffold(
-        url: 'https://mikdadagro.com/products?',
-      ),
+    return const WebviewScaffold(
+      url: 'https://mikdadagro.com',
     );
   }
 }

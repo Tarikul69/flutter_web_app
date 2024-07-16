@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_app/web_view/home.dart';
+import 'package:web_app/web_view/home1.dart';
 
 class splashscreen extends StatefulWidget {
   const splashscreen({Key? key}) : super(key: key);
@@ -16,13 +17,11 @@ class _splashscreenState extends State<splashscreen> {
   }
 
   _navigatetoscreen() async {
-    //Get.pu
-
     await Future.delayed(const Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const home(),
+        builder: (context) => home1(),
       ),
     );
   }
