@@ -20,6 +20,7 @@ dependencies:
   flutter_inappwebview:
   connectivity_plus:
   get: ^4.6.6
+  liquid_pull_refresh:
 
 dev_dependencies:
   flutter_test:

@@ -21,15 +21,9 @@ class _home1State extends State<home1> {
         onPageFinished: (String url) {},
         onHttpError: (HttpResponseError error) {},
         onWebResourceError: (WebResourceError error) {},
-        onNavigationRequest: (NavigationRequest request) {
-          if (request.url.startsWith('https://www.youtube.com/')) {
-            return NavigationDecision.prevent;
-          }
-          return NavigationDecision.navigate;
-        },
       ),
     )
-    ..loadRequest(Uri.parse('https://mikdadagro.com'));
+    ..loadRequest(Uri.parse('https://www.upwork.com'));
 
   @override
   Widget build(BuildContext context) {

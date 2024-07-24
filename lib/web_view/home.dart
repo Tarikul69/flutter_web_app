@@ -3,9 +3,6 @@ import 'dart:developer' as developer;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/route_manager.dart';
-import 'package:web_app/network/error_screen.dart';
-import 'package:web_app/web_view/home1.dart';
 
 class home extends StatefulWidget {
   const home({
@@ -24,13 +21,13 @@ class _MyHomePageState extends State<home> {
   void initState() {
     super.initState();
     initConnectivity();
-    _action();
   }
 
   Future<void> initConnectivity() async {
     late List<ConnectivityResult> result;
     try {
       result = await _connectivity.checkConnectivity();
+      Text('{$result}');
     } on PlatformException catch (e) {
       developer.log('Couldn\'t check connectivity status', error: e);
       return;
@@ -38,7 +35,6 @@ class _MyHomePageState extends State<home> {
     if (!mounted) {
       return Future.value(null);
     }
-
     return _updateConnectionStatus(result);
   }
 
@@ -48,15 +44,6 @@ class _MyHomePageState extends State<home> {
         _connectionStatus = result;
       },
     );
-  }
-
-  Future<void> _action() async {
-    final result = await Connectivity().checkConnectivity();
-    if (result == ConnectivityResult.none) {
-      Get.off(error_Screen());
-    } else {
-      Get.off(home1());
-    }
   }
 
 //##########
