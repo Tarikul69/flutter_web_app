@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:web_app/network/network_error.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class home2 extends StatefulWidget {
@@ -10,6 +12,7 @@ class home2 extends StatefulWidget {
 
 class _home2State extends State<home2> {
   int _progress = 0;
+
   late WebViewController _controller;
 
   @override
@@ -35,30 +38,32 @@ class _home2State extends State<home2> {
               _progress = 100;
             });
           },
-          onHttpError: (HttpResponseError error) {},
+          onHttpError: (HttpResponseError error) {
+            Get.to(network_error());
+          },
           onWebResourceError: (WebResourceError error) {},
         ),
       )
-      ..loadRequest(Uri.parse('https://www.upwork.com'));
+      ..loadRequest(Uri.parse('https://shashyaprabartana.com'));
   }
 
   Future<void> _reloadWebView() async {
-    _controller.loadRequest(Uri.parse('https://www.upwork.com'));
+    _controller.loadRequest(Uri.parse('https://shashyaprabartana.com'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: InkWell(
-          child: Icon(Icons.radar_sharp),
-          onTap: () {
-            _reloadWebView();
-          },
+        centerTitle: false,
+        title: Image.asset(
+          'assets/images/splash_screen.jpg',
+          width: MediaQuery.of(context).size.width * .50,
+          height: MediaQuery.of(context).size.height * .20,
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(3.0),
-          child: _progress < 90
+          child: _progress < 85
               ? LinearProgressIndicator(
                   value: _progress / 100.0,
                   backgroundColor: Colors.grey[200],
@@ -70,6 +75,17 @@ class _home2State extends State<home2> {
       body: RefreshIndicator(
         onRefresh: _reloadWebView,
         child: WebViewWidget(controller: _controller),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        // isExtended: true,
+        child: Icon(Icons.refresh),
+        backgroundColor: Colors.green,
+        onPressed: () {
+          setState(() {
+            _reloadWebView();
+          });
+        },
       ),
     );
   }
