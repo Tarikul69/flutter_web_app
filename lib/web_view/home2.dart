@@ -56,10 +56,15 @@ class _home2State extends State<home2> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Image.asset(
-          'assets/images/splash_screen.jpg',
-          width: MediaQuery.of(context).size.width * .50,
-          height: MediaQuery.of(context).size.height * .20,
+        title: InkWell(
+          onTap: () {
+            _reloadWebView();
+          },
+          child: Image.asset(
+            'assets/images/splash_screen.jpg',
+            width: MediaQuery.of(context).size.width * .50,
+            height: MediaQuery.of(context).size.height * .20,
+          ),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(3.0),

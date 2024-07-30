@@ -1,76 +1,96 @@
-import 'dart:async';
-import 'dart:developer' as developer;
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/route_manager.dart';
+import 'package:web_app/network/network_error.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class home extends StatefulWidget {
-  const home({
-    Key? key,
-  }) : super(key: key);
+  const home({super.key});
+
   @override
-  State<home> createState() => _MyHomePageState();
+  State<home> createState() => _homeState();
 }
 
-class _MyHomePageState extends State<home> {
-  //##########
-  List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
-  final Connectivity _connectivity = Connectivity();
+class _homeState extends State<home> {
+  int _progress = 0;
+
+  late WebViewController _controller;
 
   @override
   void initState() {
     super.initState();
-    initConnectivity();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            setState(() {
+              _progress = progress;
+            });
+          },
+          onPageStarted: (String url) {
+            setState(() {
+              _progress = 0;
+            });
+          },
+          onPageFinished: (String url) {
+            setState(() {
+              _progress = 100;
+            });
+          },
+          onHttpError: (HttpResponseError error) {
+            Get.to(network_error());
+          },
+          onWebResourceError: (WebResourceError error) {},
+        ),
+      )
+      ..loadRequest(Uri.parse('https://shashyaprabartana.com'));
   }
 
-  Future<void> initConnectivity() async {
-    late List<ConnectivityResult> result;
-    try {
-      result = await _connectivity.checkConnectivity();
-      Text('{$result}');
-    } on PlatformException catch (e) {
-      developer.log('Couldn\'t check connectivity status', error: e);
-      return;
-    }
-    if (!mounted) {
-      return Future.value(null);
-    }
-    return _updateConnectionStatus(result);
+  Future<void> _reloadWebView() async {
+    _controller.loadRequest(Uri.parse('https://shashyaprabartana.com'));
   }
 
-  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
-    setState(
-      () {
-        _connectionStatus = result;
-      },
-    );
-  }
-
-//##########
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Spacer(flex: 2),
-          Text('Active connection types:',
-              style: Theme.of(context).textTheme.headlineMedium),
-          const Spacer(),
-          ListView(
-            shrinkWrap: true,
-            children: List.generate(
-              _connectionStatus.length,
-              (index) => Center(
-                child: Text(
-                  _connectionStatus[index].toString(),
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-            ),
+      appBar: AppBar(
+        centerTitle: false,
+        title: InkWell(
+          onTap: () {
+            _reloadWebView();
+          },
+          child: Image.asset(
+            'assets/images/splash_screen.jpg',
+            width: MediaQuery.of(context).size.width * .50,
+            height: MediaQuery.of(context).size.height * .20,
           ),
-          const Spacer(flex: 2),
-        ],
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(3.0),
+          child: _progress < 85
+              ? LinearProgressIndicator(
+                  value: _progress / 100.0,
+                  backgroundColor: Colors.grey[200],
+                  color: Colors.blue,
+                )
+              : Container(),
+        ),
+      ),
+      body: RefreshIndicator(
+        onRefresh: _reloadWebView,
+        child: WebViewWidget(controller: _controller),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        // isExtended: true,
+        child: Icon(Icons.refresh),
+        backgroundColor: Colors.green,
+        onPressed: () {
+          setState(() {
+            _reloadWebView();
+          });
+        },
       ),
     );
   }
