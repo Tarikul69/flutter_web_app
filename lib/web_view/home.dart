@@ -44,11 +44,13 @@ class _homeState extends State<home> {
           onWebResourceError: (WebResourceError error) {},
         ),
       )
-      ..loadRequest(Uri.parse('https://www.youtube.com'));
+      ..loadRequest(
+          Uri.parse('https://www.youtube.com')); //Keep your website URL here.
   }
 
   Future<void> _reloadWebView() async {
-    _controller.loadRequest(Uri.parse('https://www.amazon.com'));
+    _controller.loadRequest(
+        Uri.parse('https://www.amazon.com')); //Keep your website URL here also.
   }
 
   @override
