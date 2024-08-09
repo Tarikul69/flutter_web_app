@@ -61,7 +61,7 @@ class _homeState extends State<home> {
             _reloadWebView();
           },
           child: Image.asset(
-            'assets/images/splash_screen.jpg',
+            'assets/images/splash_screen.png',
             width: MediaQuery.of(context).size.width * .50,
             height: MediaQuery.of(context).size.height * .20,
           ),

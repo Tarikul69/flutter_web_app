@@ -21,7 +21,7 @@ class _splashscreenState extends State<splashscreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => home2(),
+        builder: (context) => home(),
       ),
     );
   }
@@ -31,7 +31,7 @@ class _splashscreenState extends State<splashscreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset("assets/images/splash_screen.jpg"),
+        child: Image.asset("assets/images/splash_screen.png"),
       ),
     );
   }
