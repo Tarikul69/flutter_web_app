@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:web_app/web_view/home.dart';
-import 'package:web_app/web_view/home2.dart';
 
 class splashscreen extends StatefulWidget {
   const splashscreen({Key? key}) : super(key: key);
@@ -31,7 +30,8 @@ class _splashscreenState extends State<splashscreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset("assets/images/splash_screen.png"),
+        child: Image.asset(
+            "assets/images/splash_screen.png"), //Splash screen Image
       ),
     );
   }

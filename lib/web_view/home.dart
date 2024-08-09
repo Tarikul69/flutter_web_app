@@ -63,7 +63,7 @@ class _homeState extends State<home> {
             _reloadWebView();
           },
           child: Image.asset(
-            'assets/images/splash_screen.png',
+            'assets/images/splash_screen.png', //Home screen appbar image
             width: MediaQuery.of(context).size.width * .50,
             height: MediaQuery.of(context).size.height * .20,
           ),
